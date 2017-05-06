@@ -1,19 +1,13 @@
-#ifndef HEAP_H
-#define HEAP_H
+//
+// Created by Valdir Jr on 06/05/2017.
+//
 
-#include <stdio.h>
-#include <stdlib.h>
+#ifndef PRIORITYQUEUEVSHEAPQ_HEAP_H
+#define PRIORITYQUEUEVSHEAPQ_HEAP_H
 
-// Estrutura de dados para a Heap
 typedef struct Heap Heap;
-
-// Cria uma Heap vazia
-Heap * CreateHeap();
-
-// Troca valores da Heap
 void swap(int * a, int * b);
-
-// Adiciona um novo valor a Heap
+Heap * CreateHeap();
 int HEnqueue(Heap * heap, int item);
 void PrintHeap(Heap * heap);
 void MaxHeapify(Heap *heap, int i);
@@ -24,5 +18,5 @@ int HDequeue(Heap * heap);
 // Cria a Heap e retorna os dados necessários para o gráfico
 void MakeHeap(Heap * heap);
 
-
-#endif HEAP_H
+int GetHeapSize(Heap * heap);
+#endif //PRIORITYQUEUEVSHEAPQ_HEAP_H

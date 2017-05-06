@@ -21,5 +21,8 @@ PQueue * NewPQueue();
 int Dequeue(PQueue * pq);
 Node * NewNode(int data, int priority);
 int Enqueue(PQueue * pq , int data, int priority);
+int GetPQueueSize(PQueue* pq);
+
+void CleanPQueue(PQueue * pq);
 
 #endif //PRIORITYQUEUEVSHEAPQ_PRIORITYQUEUE_H

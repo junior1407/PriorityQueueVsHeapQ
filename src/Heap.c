@@ -1,4 +1,10 @@
+//
+// Created by Valdir Jr on 06/05/2017.
+//
+
 #include "../inc/Heap.h"
+#include <stdlib.h>
+#include <stdio.h>
 #define MAXSIZE 100001
 
 struct Heap {
@@ -6,19 +12,17 @@ struct Heap {
     int data[MAXSIZE];
 };
 
-Heap * CreateHeap() {
-    Heap * newHeap = (Heap*)malloc(sizeof(Heap));
-    newHeap->size = 0;
-    return newHeap;
-}
-
 void swap(int * a, int * b) {
     int temp;
     temp = *a;
     *a = *b;
     *b = temp;
 }
-
+Heap * CreateHeap() {
+    Heap * newHeap = (Heap*)malloc(sizeof(Heap)) ;
+    newHeap->size = 0;
+    return newHeap;
+}
 int HEnqueue(Heap * heap, int priority) {
     int cont = 0;
     if (heap->size >= MAXSIZE) {
@@ -38,9 +42,18 @@ int HEnqueue(Heap * heap, int priority) {
         return cont;
     }
 }
+void PrintHeap(Heap * heap)
+{
+        int i;
+        for (i=1; i <= heap->size;i++)
+        {
+            printf("%d-",heap->data[i]);
+        }
 
+}
 
-void maxHeapify(Heap *heap, int i) {
+void MaxHeapify(Heap *heap, int i)
+{
     int largest;
     int left_index = 2 * i;
     int right_index = 2 * i + 1;
@@ -54,7 +67,7 @@ void maxHeapify(Heap *heap, int i) {
     }
     if (heap->data[i] != heap->data[largest]) {
         swap(&heap->data[i], &heap->data[largest]);
-        maxHeapify(heap, largest);
+        MaxHeapify(heap, largest);
     }
 }
 
@@ -65,23 +78,19 @@ int HDequeue(Heap * heap) {
     } else {
         int item = heap->data[1];
         heap->data[1] = heap->data[heap->size--];
-        maxHeapify(heap, 1);
+        MaxHeapify(heap, 1);
         return item;
     }
 }
 
-void PrintHeap(Heap * heap)
-{
-    int i;
-    for (i=1; i < heap->size;i++)
-    {
-        printf("%d-",heap->data[i]);
-    }
-
-}
-void makeHeap(Heap * heap) {
+void MakeHeap(Heap * heap) {
     int x;
     while(scanf("%d", &x) != EOF) {
-        printf("%d;%d;HEAP\n", heap->size - 1, enqueue(heap, x));
+        printf("%d;%d;HEAP\n", heap->size - 1, HEnqueue(heap, x));
     }
+}
+
+int GetHeapSize(Heap * heap)
+{
+    return heap->size;
 }

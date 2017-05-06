@@ -6,8 +6,11 @@ INCLUDE_DIRECTORIES(C:/cunit/include)
 LINK_DIRECTORIES(C:/cunit/lib)
 
 
-set(SOURCE_FILES main.c src/PriorityQueue.c inc/PriorityQueue.h)
+set(SOURCE_FILES main.c src/PriorityQueue.c inc/PriorityQueue.h src/Heap.c inc/Heap.h)
 set(SOURCE_teste testepqueue.c src/PriorityQueue.c inc/PriorityQueue.h)
+set(SOURCE_final test.c src/PriorityQueue.c inc/PriorityQueue.h)
 add_executable(PriorityQueueVsHeapQ ${SOURCE_FILES})
 add_executable(Testes ${SOURCE_teste}   )
+add_executable(funf ${SOURCE_final} )
 target_link_libraries(Testes cunit)
+target_link_libraries(funf cunit)

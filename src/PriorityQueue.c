@@ -77,3 +77,15 @@ int Enqueue(PQueue * pq , int data, int priority)
     }
 
 }
+
+int GetPQueueSize(PQueue * pq)
+{
+    return pq->size;
+}
+void CleanPQueue(PQueue * pq)
+{
+    while(pq->size!=0)
+    {
+        Dequeue(pq);
+    }
+}
