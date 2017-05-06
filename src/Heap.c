@@ -58,7 +58,6 @@ void maxHeapify(Heap *heap, int i) {
 int dequeue(Heap * heap) {
     if(heap->size <= 0) {
         printf("Heap Underflow");
-
         return -1;
     } else {
         int item = heap->data[1];
