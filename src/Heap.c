@@ -1,5 +1,5 @@
 #include "../inc/Heap.h"
-#define MAXSIZE 100
+#define MAXSIZE 100001
 
 struct Heap {
     int size;
@@ -19,23 +19,26 @@ void swap(int * a, int * b) {
     *b = temp;
 }
 
-int enqueue(Heap * heap, int item) {
+int HEnqueue(Heap * heap, int priority) {
     int cont = 0;
-    if(heap->size >= MAXSIZE) {
+    if (heap->size >= MAXSIZE) {
         printf("Heap Overflow");
+        return 0;
     } else {
-        heap->data[++heap->size] = item;
+        heap->size++;
+        heap->data[heap->size] = priority;
         int keyIndex = heap->size;
         int parentIndex = heap->size / 2;
-        while((parentIndex >= 1) && (heap->data[keyIndex] > heap->data[parentIndex])) {
+        while ((parentIndex != 0) && (heap->data[parentIndex] < heap->data[keyIndex])) {
             cont++;
             swap(&heap->data[keyIndex], &heap->data[parentIndex]);
             keyIndex = parentIndex;
             parentIndex = keyIndex / 2;
         }
+        return cont;
     }
-    return cont;
 }
+
 
 void maxHeapify(Heap *heap, int i) {
     int largest;
@@ -55,7 +58,7 @@ void maxHeapify(Heap *heap, int i) {
     }
 }
 
-int dequeue(Heap * heap) {
+int HDequeue(Heap * heap) {
     if(heap->size <= 0) {
         printf("Heap Underflow");
         return -1;
@@ -63,11 +66,19 @@ int dequeue(Heap * heap) {
         int item = heap->data[1];
         heap->data[1] = heap->data[heap->size--];
         maxHeapify(heap, 1);
-
         return item;
     }
 }
 
+void PrintHeap(Heap * heap)
+{
+    int i;
+    for (i=1; i < heap->size;i++)
+    {
+        printf("%d-",heap->data[i]);
+    }
+
+}
 void makeHeap(Heap * heap) {
     int x;
     while(scanf("%d", &x) != EOF) {

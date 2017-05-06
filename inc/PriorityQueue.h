@@ -17,8 +17,9 @@ typedef struct Node Node;
 /*
  * Creates an empty Huffman Tree.
  */
-PQueue * NewPQueue(Node * head);
+PQueue * NewPQueue();
+int Dequeue(PQueue * pq);
 Node * NewNode(int data, int priority);
-
+int Enqueue(PQueue * pq , int data, int priority);
 
 #endif //PRIORITYQUEUEVSHEAPQ_PRIORITYQUEUE_H

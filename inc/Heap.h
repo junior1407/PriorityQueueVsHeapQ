@@ -14,14 +14,15 @@ Heap * CreateHeap();
 void swap(int * a, int * b);
 
 // Adiciona um novo valor a Heap
-int enqueue(Heap * heap, int item);
-
-void maxHeapify(Heap *heap, int i);
+int HEnqueue(Heap * heap, int item);
+void PrintHeap(Heap * heap);
+void MaxHeapify(Heap *heap, int i);
 
 // Remove o primeiro valor da Heap
-int dequeue(Heap * heap);
+int HDequeue(Heap * heap);
 
 // Cria a Heap e retorna os dados necessários para o gráfico
-void makeHeap(Heap * heap);
+void MakeHeap(Heap * heap);
+
 
 #endif HEAP_H

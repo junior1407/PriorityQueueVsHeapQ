@@ -3,6 +3,7 @@
 //
 
 #include "../inc/PriorityQueue.h"
+#include <limits.h>
 
 struct PriorityQueue {
 
@@ -14,11 +15,11 @@ struct Node{
     int priority;
     Node * next;
 };
-PQueue * NewPQueue(Node * head)
+PQueue * NewPQueue()
 {
     PQueue * newPQueue= (PQueue*)malloc(sizeof(PQueue));
     newPQueue->size=0;
-    newPQueue->head=head;
+    newPQueue->head=NULL;
 }
 Node * NewNode(int data, int priority)
 {
@@ -28,7 +29,18 @@ Node * NewNode(int data, int priority)
     newNode->priority= priority;
 }
 
-int enqueue(PQueue * pq , int data, int priority)
+int Dequeue(PQueue * pq)
+{
+    if (pq->size==0)
+    {
+        return INT_MIN;
+    }
+    int data = pq->head->data;
+    pq->head = pq->head->next;
+    (pq->size)--;
+    return data;
+}
+int Enqueue(PQueue * pq , int data, int priority)
 {
     int comparacoes=0;
     Node * new = NewNode(data,priority);
@@ -38,10 +50,9 @@ int enqueue(PQueue * pq , int data, int priority)
         (pq->size)++;
         return comparacoes;
     }
-
-    else if (pq->head->priority < priority)
+    comparacoes++;
+    if (pq->head->priority < priority)
     {
-        comparacoes++;
         new->next=pq->head;
         pq->head=new;
         (pq->size)++;
@@ -49,45 +60,20 @@ int enqueue(PQueue * pq , int data, int priority)
     }
     else
     {
-
-    }
-
-}
-/*
-void enqueue(PQueue *pq, int i, int p)
-
-{
-
-    Node *new_node = (Node*) malloc(sizeof(Node));
-
-    new_node->data = i;
-
-    new_node->priority = p;
-
-    if ((is_empty(pq)) || (p > pq->head->priority)) {
-
-        new_node->next = pq->head;
-
-        pq->head = new_node;
-
-    } else {
-
-        Node *current = pq->head;
-
-        while ((current->next != NULL) &&
-
-               (current->next->priority > p)) {
-
-            current = current->next;
-
+        Node * atual = pq->head;
+        while(atual!=NULL)
+        {
+            comparacoes++;
+            if (atual->next==NULL){comparacoes--;}
+            if ((atual->next==NULL) || ( atual->next->priority< priority))
+            {
+                new->next= atual->next;
+                atual->next= new;
+                (pq->size)++;
+                return  comparacoes;
+            }
+            atual=atual->next;
         }
-
-        new_node->next = current->next;
-
-        current->next = new_node;
-
     }
 
 }
-
-*/
