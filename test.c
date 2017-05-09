@@ -5,14 +5,14 @@
 #include "inc/PriorityQueue.h"
 
 
+
+
+
 PQueue * pq = NULL;
-int init_suite1(void) // 0 Success. -1 - Fail
+int init_suite1(void) // 0 Success. ? - Falha
 {
      pq = NewPQueue();
-    if (pq!=NULL){
-        return 0;
-    }
-    return -1;
+     return 0;
 }
 
 /* The suite cleanup function.
@@ -121,7 +121,15 @@ void insercaofim(void)
 }
 
 
-
+void testeAbsurdo(void)
+{
+    Enqueue(pq,10,-10);
+    Enqueue(pq,50,50);
+    Enqueue(pq,20,300);
+    CU_ASSERT_EQUAL(Dequeue(pq),20);
+    CU_ASSERT_EQUAL(Dequeue(pq),50);
+    CU_ASSERT_EQUAL(Dequeue(pq),10);
+}
 
 
 
@@ -169,6 +177,9 @@ int main()
             )
             ||
             (NULL == CU_add_test(pSuite2, "Texte de Insercoes Fins()",insercaofim))
+            ||
+            ((NULL == CU_add_test(pSuite2, "Texte absurdo()",testeAbsurdo))
+            )
             )
     {
         CU_cleanup_registry();

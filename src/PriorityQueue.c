@@ -65,7 +65,7 @@ int Enqueue(PQueue * pq , int data, int priority)
         {
             comparacoes++;
             if (atual->next==NULL){comparacoes--;}
-            if ((atual->next==NULL) || ( atual->next->priority< priority))
+            if ((atual->next==NULL) || ( atual->next->priority  <  priority))
             {
                 new->next= atual->next;
                 atual->next= new;
